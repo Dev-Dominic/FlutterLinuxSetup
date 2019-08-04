@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+bs4 = "*"
+pyunpack = "*"
+wget = "*"
+patool = "*"
+
+[packages]
+
+[requires]
+python_version = "3.7"
