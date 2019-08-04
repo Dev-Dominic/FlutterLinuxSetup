@@ -1,5 +1,5 @@
 # Downloading and Unpacking archives
-def unpackArchives():
+def unpackArchives(path):
 
     # Imports 
     import wget
@@ -12,28 +12,50 @@ def unpackArchives():
     print("\n\nDownloading AndroidSDK....")
     androidSDKArchive = wget.download('https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip')
 
-    print(f"\n\n{flutterArchive} : {androidSDKArchive}")
-    
     # Unpacks archives in SDK folder
     # Creates SDK folder if non exists
-    path = '/home/dominic/Documents/SDK'
     try:    
         os.mkdir(path)
     except FileExistsError:
-        print("\n\nUploading Flutter and androidSDK folders...")
+        print("\n\nSDK folder already made!")
+    finally: 
+        try:
+            os.mkdir(path+'/androidSDK')
+        except FileExistsError:
+            print("androidSDK folder already made!")
 
-    print("\n\nUnpacking Archives...")
+    print("\nUnpacking Archives...")
     # Unpacks flutter and androidsdk in SDK folder
     Archive(flutterArchive).extractall(path)
-    Archive(androidSDKArchive).extractall(path)
+    Archive(androidSDKArchive).extractall(path+'/androidSDK')
 
-    print("\n\nSuccess")
-    
+    print("Successfully!!! Unpacked")
+    print("Garbage Collecting....")
+
+    # Deletes archive files from current directory
+    os.remove(flutterArchive)
+    os.remove(androidSDKArchive)
 
 # Setting PATH variable for sdks
+def setPath(path):
+    with open("/home/dominic/.bashrc", "a") as bashFile:
+        bashFile.write(f'export PATH="$PATH:{path}"\n')
 
+    print(f"PATH Set:{path}")
 
 # Main
 if __name__ == "__main__":
-    unpackArchives()
+    defaultPath = '/home/dominic/Documents/SDK'
+    androidPath = defaultPath + '/androidSDK'
+
+    unpackArchives(defaultPath)
+    setPath(defaultPath + '/flutter/bin')
+    setPath(androidPath)
+
+    # Setting ANDROID_HOME
+    with open("/home/dominic/.bashrc", "a") as bashFile:
+        bashFile.write(f'export ANDROID_HOME="{androidPath}"')
+
+    #print("An error occured: Could not setup flutter successfully!")
+    print("Exiting.")
 
