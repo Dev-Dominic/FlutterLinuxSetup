@@ -3,6 +3,7 @@
 # Imports 
 import wget
 import os
+import sys
 import subprocess
 from pyunpack import Archive
 
@@ -42,7 +43,7 @@ def setPath(path):
         bashFile.write(path_string)
 
     # Exports path in console for present use
-    os.environ["PATH"] += os.pathsep + os.pathsep.join(path)
+    # os.environ["PATH"] += os.pathsep + os.pathsep.join(path)
     
     
     print(f"PATH Set:{path}")
@@ -63,7 +64,7 @@ def androidToolsInstall():
 
 # Main
 if __name__ == "__main__":
-    defaultPath = '/home/dominic/Documents/SDK'
+    defaultPath = sys.argv[1]
     androidPath = defaultPath + '/androidSDK'
     androidBinPath = androidPath + '/tools/bin'
 
