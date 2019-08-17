@@ -4,11 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pyunpack = "*"
-wget = "*"
-patool = "*"
 
 [packages]
+wget = "*"
+pyunpack = "*"
+patool = "*"
 
 [requires]
 python_version = "3.7"

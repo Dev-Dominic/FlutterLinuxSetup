@@ -6,6 +6,17 @@ The purpose of this script is to automate the setup of the newest version of flu
 
 ## How to run script
 
+Ensure you have pip and python 3.7.4 installed.
+
+```bash
+
+$ pip install pipenv
+$ pipenv shell 
+$ pipenv install 
+
+```
+
+`Installation is made from the Pipfile.lock`
 
 ## Steps the script takes to setup
 
@@ -14,3 +25,11 @@ The purpose of this script is to automate the setup of the newest version of flu
 3. Appends path of the flutter and android sdk into .bashrc in home user folder
 4. Runs "flutter doctor -v"
 
+## Issues
+
+- Downloading files from the android and flutter website doesn't take the most up-to-date packages.
+- The packages to required for android studio have to be installed manually after initial setup.
+(Need to find a way to reload .bashrc file)
+- Use of os functions along with subprocess funciton.
+(Need to refactor code to use only subprocess)
+- Need to make changes to make more readable code. 

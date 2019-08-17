@@ -26,13 +26,9 @@ def unpackArchives(path):
         except FileExistsError:
             print("androidSDK folder already made!")
 
-    print("\nUnpacking Archives...")
     # Unpacks flutter and androidsdk in SDK folder
     Archive(flutterArchive).extractall(path)
     Archive(androidSDKArchive).extractall(path+'/androidSDK')
-
-    print("Successfully!!! Unpacked")
-    print("Garbage Collecting....")
 
     # Deletes archive files from current directory
     os.remove(flutterArchive)
@@ -40,13 +36,20 @@ def unpackArchives(path):
 
 # Setting PATH variable for sdks
 def setPath(path):
-    with open("/home/dominic/.bashrc", "a") as bashFile:
-        bashFile.write(f'export PATH="$PATH:{path}"\n')
+    path_string = f'export PATH="$PATH:{path}"\n'
 
+    with open("/home/dominic/.bashrc", "a") as bashFile:
+        bashFile.write(path_string)
+
+    # Exports path in console for present use
+    os.environ["PATH"] += os.pathsep + os.pathsep.join(path)
+    
+    
     print(f"PATH Set:{path}")
 
 # Runs bash shell subprocess 
 # Installs various android tools and runs flutter doctor after
+"""
 def androidToolsInstall():
     # Installing android sdk tools and emulator
     subprocess.run(["sdkmanager", "platform-tools", "platforms;android-28", "build-tools;28.0.3"]) 
@@ -56,23 +59,25 @@ def androidToolsInstall():
     # Runs flutter docotor
     subprocess.run(['flutter', 'doctor','--android-licenses'])
     subprocess.run(['flutter', 'doctor'])
+"""
 
 # Main
 if __name__ == "__main__":
-    """
     defaultPath = '/home/dominic/Documents/SDK'
     androidPath = defaultPath + '/androidSDK'
+    androidBinPath = androidPath + '/tools/bin'
 
     unpackArchives(defaultPath)
     setPath(defaultPath + '/flutter/bin')
     setPath(androidPath)
-    setPath(androidPath + '/tools/bin')
+    setPath(androidBinPath)
 
     # Setting ANDROID_HOME
     with open("/home/dominic/.bashrc", "a") as bashFile:
         bashFile.write(f'export ANDROID_HOME="{androidPath}"')
-    """
-    androidToolsInstall() 
+
+    os.system(f'chmod +x {androidBinPath}/*')
+    # androidToolsInstall() 
 
     #print("An error occured: Could not setup flutter successfully!")
     print("Exiting.")
