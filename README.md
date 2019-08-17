@@ -10,9 +10,11 @@ Ensure you have pip and python 3.7.4 installed.
 
 ```bash
 
+$ git clone https://github.com/Dev-Dominic/FlutterLinuxSetup.git
 $ pip install pipenv
 $ pipenv shell 
 $ pipenv install 
+$ ./flutterSetup.py <path of installation>
 
 ```
 
