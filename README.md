@@ -10,9 +10,11 @@ Ensure you have pip and python 3.7.4 installed.
 
 ```bash
 
+$ git clone https://github.com/Dev-Dominic/FlutterLinuxSetup.git
 $ pip install pipenv
 $ pipenv shell 
 $ pipenv install 
+$ ./flutterSetup.py <path of installation>
 
 ```
 
@@ -23,7 +25,8 @@ $ pipenv install
 1. Downloads the flutter android sdk archive files
 2. Extracts the archive files into the SDK folder in the Documents
 3. Appends path of the flutter and android sdk into .bashrc in home user folder
-4. Runs "flutter doctor -v"
+4. Creates ANDROID_HOME path 
+5. Makes all the functions in the ..androidSDK/tools/bin executable
 
 ## Issues
 
