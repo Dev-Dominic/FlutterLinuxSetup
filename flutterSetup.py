@@ -64,22 +64,28 @@ def androidToolsInstall():
 
 # Main
 if __name__ == "__main__":
-    defaultPath = sys.argv[1]
-    androidPath = defaultPath + '/androidSDK'
-    androidBinPath = androidPath + '/tools/bin'
+	# Sets default path to Documents folder
+	if len(sys.argv) == 2:
+		defaultPath = sys.argv[1]
+	else:
+		defaultPath = '~/Documents'
+	
 
-    unpackArchives(defaultPath)
-    setPath(defaultPath + '/flutter/bin')
-    setPath(androidPath)
-    setPath(androidBinPath)
+	androidPath = defaultPath + '/androidSDK'
+	androidBinPath = androidPath + '/tools/bin'
 
-    # Setting ANDROID_HOME
-    with open("/home/dominic/.bashrc", "a") as bashFile:
-        bashFile.write(f'export ANDROID_HOME="{androidPath}"')
+	unpackArchives(defaultPath)
+	setPath(defaultPath + '/flutter/bin')
+	setPath(androidPath)
+	setPath(androidBinPath)
 
-    os.system(f'chmod +x {androidBinPath}/*')
-    # androidToolsInstall() 
+	# Setting ANDROID_HOME
+	with open("/home/dominic/.bashrc", "a") as bashFile:
+		bashFile.write(f'export ANDROID_HOME="{androidPath}"')
 
-    #print("An error occured: Could not setup flutter successfully!")
-    print("Exiting.")
+	os.system(f'chmod +x {androidBinPath}/*')
+	# androidToolsInstall() 
+
+	#print("An error occured: Could not setup flutter successfully!")
+	print("Exiting.")
 
